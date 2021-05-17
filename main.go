@@ -3,6 +3,10 @@ package main
 
 import (
 	"fmt"
+	"io"
+	"encoding/json"
+	"net/http"
+	"os"
 )
 
 const SUMMARY_SOURCE = "https://raw.githubusercontent.com/coronasafe/kerala-stats/master/summary.json"
@@ -35,4 +39,25 @@ type Summary struct {
 
 func main() {
 	fmt.Print(TITLE)
+	response, err := http.Get(SUMMARY_SOURCE)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error: Could not connect to the internet.\n")
+		os.Exit(1)
+	}
+	defer response.Body.Close()
+
+	if response.StatusCode != 200 {
+		fmt.Fprintf(os.Stderr, "Error: Failed to fetch resources.\n")
+		os.Exit(1)
+	}
+
+	body, err := io.ReadAll(response.Body)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error: Internal error.\n")
+		os.Exit(1)
+	}
+
+	var summary Summary
+	json.Unmarshal(body, &summary)
+	fmt.Printf("Last Updated: %s IST\n", summary.LastUpdated)
 }
