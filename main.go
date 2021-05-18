@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-const SUMMARY_SOURCE = "https://raw.githubusercontent.com/coronasafe/kerala-stats/master/summary.json"
+const SUMMARY_SOURCE = "https://keralastats.coronasafe.live/summary.json"
 
 const TITLE = `
  ██████╗ ██████╗ ██╗   ██╗██╗███████╗████████╗ █████╗ ████████╗
