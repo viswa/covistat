@@ -29,22 +29,15 @@ func errExit(err error, msg string) {
 func main() {
 	fmt.Print(TITLE)
 	response, err := http.Get(SummarySource)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error: Could not connect to the internet.\n")
-		os.Exit(1)
-	}
+	errExit(err, "Could not connect to the internet.")
 	defer response.Body.Close()
 
 	if response.StatusCode != 200 {
-		fmt.Fprintf(os.Stderr, "Error: Failed to fetch resources.\n")
-		os.Exit(1)
+		errExit(fmt.Errorf(""), "Failed to fetch resources.")
 	}
 
 	body, err := io.ReadAll(response.Body)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error: Internal error.\n")
-		os.Exit(1)
-	}
+	errExit(err, "Internal error.")
 
 	var summary Summary
 	json.Unmarshal(body, &summary)
