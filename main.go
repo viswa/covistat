@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-const SUMMARY_SOURCE = "https://keralastats.coronasafe.live/summary.json"
+const SummarySource = "https://keralastats.coronasafe.live/summary.json"
 
 const TITLE = `
  ██████╗ ██████╗ ██╗   ██╗██╗███████╗████████╗ █████╗ ████████╗
@@ -39,7 +39,7 @@ type Summary struct {
 
 func main() {
 	fmt.Print(TITLE)
-	response, err := http.Get(SUMMARY_SOURCE)
+	response, err := http.Get(SummarySource)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error: Could not connect to the internet.\n")
 		os.Exit(1)
