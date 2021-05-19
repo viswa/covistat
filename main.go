@@ -18,6 +18,14 @@ const TITLE = `
  ╚═════╝ ╚═════╝   ╚═══╝  ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝   ╚═╝
 `
 
+// errExit checks err, displays msg and exits the program is err is not nil
+func errExit(err error, msg string) {
+	if err != nil {
+		fmt.Fprintf(os.Stderr, fmt.Sprintf("Error: %s\n", msg))
+		os.Exit(1)
+	}
+}
+
 func main() {
 	fmt.Print(TITLE)
 	response, err := http.Get(SummarySource)
