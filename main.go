@@ -2,11 +2,11 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
 	"os"
+	"sync"
 )
 
 const TITLE = `
@@ -31,9 +31,15 @@ func errExit(err error, msg string) {
 	}
 }
 
-func main() {
-	fmt.Print(TITLE)
-	response, err := http.Get(SummarySource)
+// wg synchronizes fetchResource running in goroutines
+var wg sync.WaitGroup
+
+// fetchResource reads HTTP response from source and unmarshals
+// it to summary
+func fetchResource(source string, summary Unmarshaller) {
+	defer wg.Done()
+
+	response, err := http.Get(source)
 	errExit(err, "Could not connect to the internet.")
 	defer response.Body.Close()
 
@@ -44,7 +50,20 @@ func main() {
 	body, err := io.ReadAll(response.Body)
 	errExit(err, "Internal error.")
 
+	// Unmarshal body to summary and check for errors
+	errExit(summary.Unmarshal(body), "Invalid response.")
+}
+
+func main() {
 	var summary Summary
-	json.Unmarshal(body, &summary)
+	var vaccineSummary VaccineSummary
+
+	wg.Add(2)
+	go fetchResource(SummarySource, &summary)
+	go fetchResource(VaccinationSummarySource, &vaccineSummary)
+
+	fmt.Print(TITLE)
+	wg.Wait()
+
 	fmt.Printf("Last Updated: %s IST\n", summary.LastUpdated)
 }
