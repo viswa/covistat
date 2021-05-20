@@ -7,11 +7,14 @@ const VaccinationSummarySource = "https://keralastats.coronasafe.live/vaccinatio
 // National Commission on Population
 const KeralaPopulation = 3_54_89_000
 
+// VaccineStat represents vaccination stats
 type VaccineStat struct {
 	FirstDose  int `json:"tot_person_vaccinations"`
 	SecondDose int `json:"second_dose"`
 }
 
+// VaccineSummary represents present total and additions withint a day
+// in VaccineStat
 type VaccineSummary struct {
 	Summary VaccineStat
 	Delta   VaccineStat
