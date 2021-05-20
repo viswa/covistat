@@ -1,5 +1,7 @@
 package main
 
+import "encoding/json"
+
 // API for latest summary of COVID-19 stats
 const SummarySource = "https://keralastats.coronasafe.live/summary.json"
 
@@ -20,4 +22,9 @@ type Summary struct {
 	Summary     Stats
 	Delta       Stats
 	LastUpdated string `json:"last_updated"`
+}
+
+// Unmarshal unmarshals jsonData to v
+func (s *Summary) Unmarshal(jsonData []byte) error {
+	return json.Unmarshal(jsonData, s)
 }

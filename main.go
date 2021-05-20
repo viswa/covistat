@@ -18,6 +18,11 @@ const TITLE = `
  ╚═════╝ ╚═════╝   ╚═══╝  ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝   ╚═╝
 `
 
+// Unmarshaller interface represents types that can unmarshal JSON data
+type Unmarshaller interface {
+	Unmarshal([]byte) error
+}
+
 // errExit checks err, displays msg and exits the program is err is not nil
 func errExit(err error, msg string) {
 	if err != nil {
