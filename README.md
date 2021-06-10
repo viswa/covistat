@@ -1,7 +1,7 @@
 # Covistat
 ## Covid-19 stats summary for Kerala in your terminal
 <p align="center">
-    <img alt="covistat output" src="assets/output.png">
+    <img alt="covistat output" src="assets/output.svg">
 </p>
 
 Covistat is a terminal app that displays Covid-19 statistics for Kerala, fetching and displaying from public [API](https://keralastats.coronasafe.live/)s by Coronasafe.
