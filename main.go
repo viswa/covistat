@@ -2,8 +2,8 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
-	"io"
 	"net/http"
 	"os"
 	"sync"
@@ -18,11 +18,6 @@ const TITLE = `
  ╚═════╝ ╚═════╝   ╚═══╝  ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝   ╚═╝
 `
 
-// Unmarshaller interface represents types that can unmarshal JSON data
-type Unmarshaller interface {
-	Unmarshal([]byte) error
-}
-
 // errExit checks err, displays msg and exits the program is err is not nil
 func errExit(err error, msg string) {
 	if err != nil {
@@ -36,7 +31,7 @@ var wg sync.WaitGroup
 
 // fetchResource reads HTTP response from source and unmarshals
 // it to summary
-func fetchResource(source string, summary Unmarshaller) {
+func fetchResource(source string, summary interface{}) {
 	defer wg.Done()
 
 	response, err := http.Get(source)
@@ -47,11 +42,9 @@ func fetchResource(source string, summary Unmarshaller) {
 		errExit(fmt.Errorf(""), "Failed to fetch resources.")
 	}
 
-	body, err := io.ReadAll(response.Body)
-	errExit(err, "Internal error.")
-
 	// Unmarshal body to summary and check for errors
-	errExit(summary.Unmarshal(body), "Invalid response.")
+	err = json.NewDecoder(response.Body).Decode(summary)
+	errExit(err, "Invalid response.")
 }
 
 func main() {

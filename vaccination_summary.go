@@ -1,7 +1,5 @@
 package main
 
-import "encoding/json"
-
 // API for latest vaccination statistics
 const VaccinationSummarySource = "https://keralastats.coronasafe.live/vaccination_summary.json"
 
@@ -20,9 +18,4 @@ type VaccineStat struct {
 type VaccineSummary struct {
 	Summary VaccineStat
 	Delta   VaccineStat
-}
-
-// Unmarshal unmarshals jsonData to v
-func (v *VaccineSummary) Unmarshal(jsonData []byte) error {
-	return json.Unmarshal(jsonData, v)
 }
