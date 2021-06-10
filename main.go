@@ -43,7 +43,7 @@ func fetchResource(source string, summary Unmarshaller) {
 	errExit(err, "Could not connect to the internet.")
 	defer response.Body.Close()
 
-	if response.StatusCode != 200 {
+	if response.StatusCode != http.StatusOK {
 		errExit(fmt.Errorf(""), "Failed to fetch resources.")
 	}
 
