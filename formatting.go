@@ -25,8 +25,7 @@ func localize(num int) string {
 	}
 
 	// builder string is to be further reversed
-	reversed := builder.String()
-	digits = []rune(reversed)
+	digits = []rune(builder.String())
 	n := len(digits)
 	for i := 0; i < n/2; i++ {
 		digits[i], digits[n-1-i] = digits[n-1-i], digits[i]
