@@ -3,8 +3,8 @@ package main
 // API for latest summary of COVID-19 stats
 const SummarySource = "https://keralastats.coronasafe.live/summary.json"
 
-// Stats represents Covid-19 activity stats
-type Stats struct {
+// CovidStat represents Covid-19 activity stats
+type CovidStat struct {
 	Confirmed     int `json:"confirmed"`
 	Recovered     int `json:"recovered"`
 	Active        int `json:"active"`
@@ -15,9 +15,9 @@ type Stats struct {
 	HospitalToday int `json:"hospital_today"`
 }
 
-// Summary represents present total and changes within a day in Stats
+// Summary represents present total and changes within a day in CovidStat
 type Summary struct {
-	Summary     Stats
-	Delta       Stats
+	Summary     CovidStat
+	Delta       CovidStat
 	LastUpdated string `json:"last_updated"`
 }
