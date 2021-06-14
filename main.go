@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"os"
 	"sync"
+
+	"github.com/logrusorgru/aurora/v3"
 )
 
 const TITLE = `
@@ -55,7 +57,7 @@ func main() {
 	go fetchResource(SummarySource, &summary)
 	go fetchResource(VaccinationSummarySource, &vaccineSummary)
 
-	fmt.Print(TITLE)
+	fmt.Print(aurora.Index(189, TITLE))
 	wg.Wait()
 
 	// Cases
