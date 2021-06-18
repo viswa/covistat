@@ -61,41 +61,53 @@ func main() {
 	wg.Wait()
 
 	// Cases
-	fmt.Printf("                         Last Updated: %s IST\n\n", summary.LastUpdated)
-	fmt.Printf("               Total confirmed : %-12s [%+d]\n",
+	fmt.Printf("                         %v: %s IST\n\n",
+		aurora.Index(69, "Last Updated"),
+		summary.LastUpdated)
+	fmt.Printf("               %v : %-12s [%+d]\n",
+		aurora.Index(69, "Total confirmed"),
 		localize(summary.Summary.Confirmed),
 		summary.Delta.Confirmed)
-	fmt.Printf("               Active Cases    : %-12s [%+d]\n",
+	fmt.Printf("               %v    : %-12s [%+d]\n",
+		aurora.Index(69, "Active Cases"),
 		localize(summary.Summary.Active),
 		summary.Delta.Active)
-	fmt.Printf("               Recovered       : %-12s [%+d]\n",
+	fmt.Printf("               %v       : %-12s [%+d]\n",
+		aurora.Index(69, "Recovered"),
 		localize(summary.Summary.Recovered),
 		summary.Delta.Recovered)
-	fmt.Printf("               Deaths          : %-12s [%+d]\n\n",
+	fmt.Printf("               %v          : %-12s [%+d]\n\n",
+		aurora.Index(69, "Deaths"),
 		localize(summary.Summary.Deceased),
 		summary.Delta.Deceased)
 
 	// Vaccination stats
 	fmt.Println("                      Vaccination Summary")
-	fmt.Printf("                   First Dose  : %-12s [%+d]\n",
+	fmt.Printf("                   %v  : %-12s [%+d]\n",
+		aurora.Index(69, "First Dose"),
 		localize(vaccineSummary.Summary.FirstDose),
 		vaccineSummary.Delta.FirstDose)
-	fmt.Printf("                   Second Dose : %-12s [%+d]\n",
+	fmt.Printf("                   %v : %-12s [%+d]\n",
+		aurora.Index(69, "Second Dose"),
 		localize(vaccineSummary.Summary.SecondDose),
 		vaccineSummary.Delta.SecondDose)
-	fmt.Printf("                   Total       : %-12s\n",
+	fmt.Printf("                   %v      : %-12s\n",
+		aurora.Index(69, "Total "),
 		localize(vaccineSummary.Summary.FirstDose+vaccineSummary.Summary.SecondDose))
 	fmt.Printf("     %.2f%% Population(3,54,89,000) of Kerala is vaccinated\n\n",
 		float64(vaccineSummary.Summary.FirstDose)/KeralaPopulation*100)
 
 	// Quarantine stats
 	fmt.Println("                       Quarantine Summary")
-	fmt.Printf("                Hospitalized   : %-12s [%+d]\n",
+	fmt.Printf("                %v   : %-12s [%+d]\n",
+		aurora.Index(69, "Hospitalized"),
 		localize(summary.Summary.HospitalObs),
 		summary.Delta.HospitalObs)
-	fmt.Printf("                Home Isolation : %-12s [%+d]\n",
+	fmt.Printf("                %v : %-12s [%+d]\n",
+		aurora.Index(69, "Home Isolation"),
 		localize(summary.Summary.HomeObs),
 		summary.Delta.HomeObs)
-	fmt.Printf("                Total          : %-12s\n",
+	fmt.Printf("                %v          : %-12s\n",
+		aurora.Index(69, "Total"),
 		localize(summary.Summary.TotalObs))
 }
