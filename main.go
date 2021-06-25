@@ -59,6 +59,7 @@ func main() {
 
 	fmt.Print(aurora.Index(189, TITLE))
 	wg.Wait()
+	vaccineSummary.CalcSecondDose()
 
 	// Cases
 	fmt.Printf("                         %v: %s IST\n\n",
@@ -83,19 +84,19 @@ func main() {
 
 	// Vaccination stats
 	fmt.Println("                      Vaccination Summary")
-	fmt.Printf("                   %v  : %-12s [%+d]\n",
+	fmt.Printf("                   %v  : %-12s [+%s]\n",
 		aurora.Index(69, "First Dose"),
 		localize(vaccineSummary.Summary.FirstDose),
-		vaccineSummary.Delta.FirstDose)
-	fmt.Printf("                   %v : %-12s [%+d]\n",
+		localize(vaccineSummary.Delta.FirstDose))
+	fmt.Printf("                   %v : %-12s [+%s]\n",
 		aurora.Index(69, "Second Dose"),
 		localize(vaccineSummary.Summary.SecondDose),
-		vaccineSummary.Delta.SecondDose)
+		localize(vaccineSummary.Delta.SecondDose))
 	fmt.Printf("                   %v      : %-12s\n",
 		aurora.Index(69, "Total "),
-		localize(vaccineSummary.Summary.FirstDose+vaccineSummary.Summary.SecondDose))
+		localize(vaccineSummary.Summary.TotalDose))
 	fmt.Printf("     %.2f%% Population(3,54,89,000) of Kerala is vaccinated\n\n",
-		float64(vaccineSummary.Summary.FirstDose)/KeralaPopulation*100)
+		vaccineSummary.VaccinatedPercent())
 
 	// Quarantine stats
 	fmt.Println("                       Quarantine Summary")
