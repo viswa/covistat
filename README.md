@@ -11,7 +11,7 @@ Covistat is a terminal app that displays Covid-19 statistics for Kerala, fetchin
 ## Installation
 Install the latest version in `$GOBIN` or `$GOROOT\bin` by
 
-    go get github.com/viswa/covistat@latest
+    go install github.com/viswa/covistat@latest
 
 Or download the appropriate binary from [releases](https://github.com/viswa/covistat/releases/)
 ## Usage
