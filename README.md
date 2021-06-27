@@ -1,5 +1,5 @@
 # Covistat
-## Covid-19 stats summary for Kerala in your terminal
+A Terminal app for Covid-19 stats
 <p align="center">
     <img alt="covistat output" src="assets/output.svg">
 </p>
